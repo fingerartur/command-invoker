@@ -1,14 +1,14 @@
 # Command invoker
 
-A very simple command invoker + memento pattern implementation in Typescript. Actions are broken down into commands, invoker invokes commands, invoker remembers invoked commands and allows undo, redo.
+A very simple command invoker + memento pattern implementation in Typescript. *Actions are broken down into commands. Invoker invokes commands. Invoker remembers invoked commands and allows undo, redo.*
 - there is no upper limit on the amount of commands the invoker remembers
-- when you do multiple undo() and then invoke(), all redos() are lost *(behavior expected by a normal user)*
-- when there is nothing else to undo, the undo() method simply does nothing *(the same goes fo redo(); behavior expected by a normal user)*
+- when you do multiple ```undo()``` and then ```invoke()```, all redos vanish *(i.e. classic behavior)*
+- when there is nothing else to undo, the ```undo()``` method simply does nothing *(the same goes for ```redo()```, i.e. classic behavior)*
 
 # API
 
 ```js
-import { Command, CommandInvoker, MultiCommand } from 'command-invoker-ts';
+import { Command, CommandInvoker, MultiCommand } from 'ts-command-invoker';
 
 /**
  * Your commands inherit from it.
@@ -44,8 +44,12 @@ MultiCommand
 
 Everything is nicely tested. If you want to learn more, look at examples in ```/examples``` and test in ```/src/*test.ts```.
 
+# Licence
 
-## How to publish typescript to npm
+Feel free to use in any way. (ISC)
+
+
+## Footnotes: How to publish typescript to npm
 
 It's a bit tricky. Pure typescript cannot be published, because webpack, etc. do not compile the code of libraries.
 *(After install this results in the cryptic error: package not found; no idea why)*
