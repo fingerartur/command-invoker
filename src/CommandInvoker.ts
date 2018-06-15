@@ -6,7 +6,7 @@ export class CommandInvoker {
 
   invoke(command: Command): void {
     command.do();
-    this.queue.push(command);
+    this.queue[this.cursor] = command;
     this.cursor++;
     this.clearFutureRedos();
   }
@@ -26,6 +26,9 @@ export class CommandInvoker {
   }
 
   private clearFutureRedos(): void {
-    this.queue = this.queue.slice(0, this.cursor);
+    if (this.cursor < this.queue.length) {
+      this.queue = this.queue.slice(0, this.cursor);
+    }
   }
+  
 }

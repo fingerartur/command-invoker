@@ -42,7 +42,7 @@ describe('CommandInvoker', () => {
         expect(counter.number).to.equal(0);
     });
 
-    it('can redo commands in correct oreder', () => {
+    it('can redo commands in correct order', () => {
         invoker.invoke(commandAddOne);
         invoker.invoke(commandAddTwo);
         invoker.undo();
@@ -74,9 +74,12 @@ describe('CommandInvoker', () => {
         invoker.undo();
         invoker.undo();
         expect(counter.number).to.equal(0);
-        invoker.invoke(commandAddOne);
+        invoker.invoke(commandAddTwo);
         invoker.redo();
         invoker.redo();
-        expect(counter.number).to.equal(1);
-    })
+        expect(counter.number).to.equal(2);
+        invoker.undo();
+        expect(counter.number).to.equal(0);
+    });
+
 });
