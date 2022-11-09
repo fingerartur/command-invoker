@@ -5,6 +5,10 @@ A very simple command invoker + memento pattern implementation in Typescript. *A
 - when you do multiple ```undo()``` and then ```invoke()```, all redos vanish *(i.e. classic behavior)*
 - when there is nothing else to undo, the ```undo()``` method simply does nothing *(the same goes for ```redo()```, i.e. classic behavior)*
 
+## Install
+
+```npm i ts-command-invoker```
+
 # API
 
 ```js
@@ -36,30 +40,18 @@ MultiCommand
 
 ```
 
-# Install
 
-```npm i ts-command-invoker```
 
-# Examples and tests
+## Examples and tests
 
 Everything is nicely tested. If you want to learn more, look at examples in ```/examples``` and test in ```/src/*test.ts```.
 
-# Licence
+## License
 
 Feel free to use in any way. (ISC)
 
+## Changelog
 
-## Footnotes: How to publish typescript to npm
-
-It's a bit tricky. Pure typescript cannot be published, because webpack, etc. do not compile the code of libraries.
-*(After install this results in the cryptic error: package not found; no idea why)*
-
-```
-// index.ts exports all exports
-npm i typescript --save-dev
-package.json > scripts: build: "tsc"
-npm run build
-package.json > main: dist/index.js; types: dist/index.d.ts
-npm adduser
-npm publish
-```
+- Unreleased
+- v1.0.0
+  - Command invoker implementation
