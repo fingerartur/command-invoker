@@ -1,7 +1,7 @@
 {
   "name": "ts-command-invoker",
   "version": "1.0.0",
-  "description": "Typescript implementation of the command invoker pattern with memento, useful for undo / redo",
+  "description": "Command invoker for easy implementation of undo/redo",
   "keywords": [
     "command",
     "invoker",
@@ -10,7 +10,7 @@
     "typescript"
   ],
   "main": "dist/index.js",
-  "types" : "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "devDependencies": {
     "@types/chai": "^4.1.3",
     "@types/mocha": "^5.2.1",
