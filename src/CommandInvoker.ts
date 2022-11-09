@@ -22,7 +22,7 @@ export class CommandInvoker {
     if (this.cursor < this.queue.length) {
       this.queue[this.cursor].do();
       this.cursor++;
-    }    
+    }
   }
 
   private clearFutureRedos(): void {
@@ -30,5 +30,5 @@ export class CommandInvoker {
       this.queue = this.queue.slice(0, this.cursor);
     }
   }
-  
+
 }
