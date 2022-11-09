@@ -1,50 +1,72 @@
 # Command invoker
 
-A very simple command invoker + memento pattern implementation in Typescript. *Actions are broken down into commands. Invoker invokes commands. Invoker remembers invoked commands and allows undo, redo.*
-- there is no upper limit on the amount of commands the invoker remembers
-- when you do multiple ```undo()``` and then ```invoke()```, all redos vanish *(i.e. classic behavior)*
-- when there is nothing else to undo, the ```undo()``` method simply does nothing *(the same goes for ```redo()```, i.e. classic behavior)*
+A simple command invoker, that can be used to implement undo/redo functionality (aka `Ctrl+Z` / `Ctrl+Shift+Z`).
 
-## Install
+## Installation
 
 ```npm i ts-command-invoker```
 
-# API
+## Example usage
 
-```js
-import { Command, CommandInvoker, MultiCommand } from 'ts-command-invoker';
+Command invoker can invoke commands and later undo or redo them. This can be useful for implementing classic undo/redo behavior such as the one you know from Google docs, etc.
 
-/**
- * Your commands inherit from it.
- * You pass your data to the command via your custom constructor.
- */
-Command
-    .do()
-    .redo()
+```ts
+import { Command, CommandInvoker } from 'ts-command-invoker';
 
-/**
- * Invokes commands and remembers them in order to provide undo and redo.
- * Throws if undo is called when there is nothing to undo (same for redo).
- */
-CommandInvoker
-    .invoke(command)
-    .undo()
-    .redo()
+let counter = 0;
 
-/**
- * Sometimes you want multiple commands executed at once (eg. delete and unselect),
- * MultiCommand takes this array of commands and executes them in the correct order (same for undo)
- */
-MultiCommand
-    constructor(command[])
+export class AddOneCommand extends Command {
+    do(): void {
+        counter += 1;
+    }
 
+    undo(): void {
+        counter -= 1;
+    }
+}
+
+const invoker = new CommandInvoker();
+
+invoker.invoke(new AddOneCommand());
+// counter === 1
+
+invoker.invoke(new AddOneCommand());
+// counter === 2
+
+invoker.undo()
+// counter === 1
+
+invoker.undo()
+// counter === 0
+
+invoker.redo()
+// counter === 1
 ```
 
+Multiple commands can be batched into one using `MultiCommand`.
 
+```ts
+import { Command, CommandInvoker, MultiCommand } from 'ts-command-invoker';
 
-## Examples and tests
+export class DeleteCommand extends Command {
+    do(): void {
+      // delete one item
+    }
 
-Everything is nicely tested. If you want to learn more, look at examples in ```/examples``` and test in ```/src/*test.ts```.
+    undo(): void {
+      // bring back one item
+    }
+}
+
+const deleteMultiple = new MultiCommand([
+    new DeleteCommand(item1),
+    new DeleteCommand(item2),
+]);
+
+const invoker = new CommandInvoker();
+
+invoker.invoke(deleteMultiple);
+```
 
 ## License
 
@@ -53,5 +75,6 @@ Feel free to use in any way. (ISC)
 ## Changelog
 
 - Unreleased
+  - Improved Usage example
 - v1.0.0
   - Command invoker implementation
