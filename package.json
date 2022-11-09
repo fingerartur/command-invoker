@@ -21,6 +21,7 @@
   },
   "scripts": {
     "build": "rm -rf ./dist && tsc",
+    "prepublish": "npm run build",
     "test": "mocha -r ts-node/register src/**/*.test.ts"
   },
   "directories": {
