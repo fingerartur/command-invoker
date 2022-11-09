@@ -1,6 +1,6 @@
 {
   "name": "ts-command-invoker",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Command invoker for easy implementation of undo/redo",
   "keywords": [
     "command",

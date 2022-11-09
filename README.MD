@@ -74,7 +74,7 @@ Feel free to use in any way. (ISC)
 
 ## Changelog
 
-- Unreleased
+- v1.0.3
   - Improved Usage example
 - v1.0.0
   - Command invoker implementation
